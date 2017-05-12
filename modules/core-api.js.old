@@ -1,0 +1,104 @@
+let request = require('request'),
+    _ = require('lodash'),
+    core_url = process.env.CORE_URL,
+    authenCode = process.env.CORE_AUTHENTICATION_CODE;
+
+exports.checkCustomer = (sender)=>{
+    return new Promise((resolve, reject)=>{
+        request({
+            url: `${core_url}core/checkCustomer`,
+            method: 'POST',
+            json: {
+                authenCode: authenCode,
+                channel: 1,
+                sender: sender
+            }
+        }, (error, response) => {
+            if (error) {
+                console.log('Error sending message: ', error);
+                return reject(error);
+            } else if (response.body.returnCode > 10) {
+                console.log('Error: ', response.body.error);
+                return reject(response.body.error);
+            }
+            return resolve( response.body);
+        });
+    });
+};
+
+exports.sendCodeToMobile = (sender, mobile, code)=>{
+    return new Promise((resolve, reject)=>{
+        request({
+            url: `${core_url}core/sendCodeToMobile`,
+            method: 'POST',
+            json: {
+                authenCode: authenCode,
+                channel: 1,
+                mobile: mobile,
+                sender: sender,
+                code: code
+            }
+        }, (error, response) => {
+            if (error) {
+                console.log('Error sending message: ', error);
+                return reject(error);
+            } else if (response.body.returnCode > 10) {
+                console.log('Error: ', response.body.error);
+                return reject(response.body.error);
+            }
+            return resolve(response.body);
+        });
+    });
+};
+
+exports.newCustomer  = (customer)=>{
+    let body = customer || {};
+    body = Object.assign(body, {
+        authenCode: authenCode,
+        channel: 1,
+    });
+
+    return new Promise((resolve, reject)=>{
+        request({
+            url: `${core_url}core/sendCodeToMobile`,
+            method: 'POST',
+            json: body
+        }, (error, response) => {
+            if (error) {
+                console.log('Error sending message: ', error);
+                return reject(error);
+            } else if (response.body.returnCode > 10) {
+                console.log('Error: ', response.body.error);
+                return reject(response.body.error);
+            }
+            return resolve( response.body);
+        });
+    });
+};
+
+
+
+exports.bookNow = (sender, mobile, product_code)=>{
+    return new Promise((resolve, reject)=>{
+        request({
+            url: `${core_url}core/bookNow`,
+            method: 'POST',
+            json: {
+                authenCode: authenCode,
+                channel: 1,
+                mobile: mobile,
+                sender: sender,
+                product_code: product_code
+            }
+        }, (error, response) => {
+            if (error) {
+                console.log('Error sending message: ', error);
+                return reject(error);
+            } else if (response.body.returnCode > 10) {
+                console.log('Error: ', response.body.error);
+                return reject(response.body.error);
+            }
+            return resolve( response.body);
+        });
+    });
+};

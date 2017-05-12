@@ -1,0 +1,36 @@
+{
+  "name": "transforce-fb-bot",
+  "version": "1.0.0",
+  "description": "A Salesforce-powered bot for the DreamHouse sample application.",
+  "main": "index.js",
+  "engines": {
+    "node": "7.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node  --harmony-async-await server.js"
+  },
+  "author": "tu.tran@gk2s.net",
+  "license": "ISC",
+  "dependencies": {
+    "@google/maps": "^0.3.1",
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.13.4",
+    "express-session": "^1.14.2",
+    "i18n": "^0.5.0",
+    "lodash": "^4.17.2",
+    "moment": "^2.13.0",
+    "nforce": "^1.4.1",
+    "numeral": "^1.5.3",
+    "redis": "^2.6.3",
+    "request": "^2.71.0",
+    "soap": "^0.19.0",
+    "xml2js": "^0.4.17"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.heroku.com/gk2s-fb-bot3.git"
+  },
+  "keywords": []
+}
